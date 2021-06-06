@@ -29,7 +29,7 @@
       .signInWithPopup(googleProvider)
       .then((result) => {
         saveUser(result.user);
-        navigate("/home");
+        navigate("/home"); // pasar el user a Home / guardarlo en sesion
       })
       .catch(() => {
         alert("Ocurrio un error, intentalo mas tarde.");
