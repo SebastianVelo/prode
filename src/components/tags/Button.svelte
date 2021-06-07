@@ -1,7 +1,7 @@
 <script>
     export let label;
     export let bgColor = "";
-    export let size;
+    export let size = "";
     export let onClick;
 
     const sizes = {

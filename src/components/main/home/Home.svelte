@@ -35,11 +35,15 @@
 </script>
 
 <div>
-    <Title title="Predicciones pendientes" />
+    <Title title="Predicciones" />
     <p class="flow-text">
         ¡Hola {user.displayName}! Tenes tiempo hasta 1 hora antes del partido para guardar tus
         predicciones.
     </p>
+    <ul class="flow-text">
+        <li>+3 puntos por resultado exacto</li>
+        <li>+1 puntos por acertar quien gana</li>
+    </ul>
     {#if groups.length === 0}
         <Loading />
     {/if}

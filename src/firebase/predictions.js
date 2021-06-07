@@ -1,7 +1,20 @@
 import { db } from "./firebase";
 
-function savePrediction(prediction) {
-    return db.collection("predictions").doc().set(prediction);
+function savePrediction(userId, matchId, prediction) {
+    return db.collection(`users`).doc(userId).collection(`predictions`).doc(matchId).set(prediction);
 }
 
-export { savePrediction };
+function getPrediction(userId, matchId) {
+    let prediction;
+    db.collection(`users`).doc(userId)
+        .collection(`predictions`).doc(matchId).get()
+        .then((doc) => {
+            prediction = doc.data();
+        })
+        .catch(() => {
+            prediction = null;
+        });
+    return prediction;
+}
+
+export { getPrediction, savePrediction };

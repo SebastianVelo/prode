@@ -1,13 +1,22 @@
 <script>
-	import { fly } from 'svelte/transition';
+    import { fly } from "svelte/transition";
+    import { db } from "../../../../firebase/firebase";
     import Flag from "./Flag.svelte";
     import ButtonSavePrediction from "./ButtonSavePrediction.svelte";
 
     export let columns = "";
     export let match;
-    export let deleteMatch; 
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    let visible = true;
+    let predictionDB;
+    db.collection(`users`)
+        .doc(user.uid)
+        .collection(`predictions`)
+        .doc(match.id)
+        .get()
+        .then((doc) => {
+            predictionDB = doc.data();
+        });
 
     const layout = {
         header: {
@@ -24,26 +33,22 @@
     };
 
     let prediction = {
-        home: match.home,
-        away: match.away,
+        home: match.home.id,
+        away: match.away.id,
         goalsH: 0,
         goalsA: 0,
-        user: "Nit1iqwiVmOjqYqV1SZtT4Q01I92",
-        match: match.id,
-        dateSave: Date.now(),
     };
-
+    console.log(predictionDB);
+    console.log(prediction);
 </script>
 
-{#if visible}
-<div class={`${columns} row`} transition:fly="{{ x: -20000, duration: 500 }}">
+<div class={`${columns} row`} transition:fly={{ x: -20000, duration: 500 }}>
     <div class={layout.header.className}>
-        <p>{match.datePlay}</p>
     </div>
     <div class={layout.main.className}>
         <Flag className={layout.main.flag} country={match.home} />
         <div class={layout.main.goals.className}>
-            {#if match.goalsH === '-'}
+            {#if !predictionDB}
                 <input
                     bind:value={prediction.goalsH}
                     type="number"
@@ -57,14 +62,22 @@
                     min={0}
                 />
             {:else}
-                <p class="flow-text">{match.goalsH} - {match.goalsA}</p>
+                <p class="flow-text">
+                    {predictionDB.goalsH} - {predictionDB.goalsA}
+                </p>
             {/if}
         </div>
         <Flag className={layout.main.flag} country={match.away} />
     </div>
-    <ButtonSavePrediction {prediction} {deleteMatch} />
+    {#if !predictionDB}
+        <ButtonSavePrediction
+            userId={user.uid}
+            matchId={match.id}
+            {prediction}
+            action={(prediction) => predictionDB = prediction }
+        />
+    {/if}
 </div>
-{/if}
 
 <style>
     .main {

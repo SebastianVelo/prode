@@ -9019,4 +9019,9 @@ input[type=range]::-ms-thumb {
 .date:nth-child(even) {
   background-color: whitesmoke;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
 /*# sourceMappingURL=global.css.map */

@@ -21,17 +21,11 @@
         }
     );
     
-    function deleteMatch(id) {
-        matches = matches.filter((match) => match.id !== id);
-    }
 </script>
 
 <div class="date col s12 l4 row">
     <h4>{date.name}</h4>
-    {#if matches.length === 0}
-        <h5>Ya cargaste todos los partidos de esta fecha.</h5>
-    {/if}
     {#each matches as match}
-        <Match {match} columns="col s12" {deleteMatch} />
+        <Match {match} columns="col s12" />
     {/each}
 </div>
