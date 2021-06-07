@@ -5,7 +5,6 @@
 
 <div class="col s12 row">
     <h2>{group.name}</h2>
-    <hr/>
     {#each group.dates as date}
         <Date date={date} />
     {/each}
