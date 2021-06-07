@@ -1,7 +1,20 @@
 <script>
+    import { getContext } from "svelte";
     import { db } from "../../../firebase/firebase";
     import Loading from "../../tags/Loading.svelte";
     import Group from "./group/Group.svelte";
+
+    console.log(getContext("user"));
+    let user = { id: "Nit1iqwiVmOjqYqV1SZtT4Q01I92" };
+
+    let predictions = [];
+    db.collection("predictions").onSnapshot((querySnapshot) => {
+        let docs = [];
+        querySnapshot.forEach((p) => {
+            if (p.data().user === user.id) docs.push({ id: p.id, ...p.data() });
+        });
+        predictions = [...docs];
+    });
 
     let teams = [];
     db.collection("teams").onSnapshot((querySnapshot) => {
@@ -16,6 +29,7 @@
     db.collection("matches").onSnapshot((querySnapshot) => {
         let docs = [];
         querySnapshot.forEach((m) => {
+            if (predictions.some((p) => p.match === m.id)) return;
             let match = {
                 ...m.data(),
                 id: m.id,
@@ -60,14 +74,17 @@
 </script>
 
 <div>
-    <h2>Home</h2>
-    <p class="flow-text">Tenes tiempo hasta 1 hora antes del partido para guardar tus predicciones.</p>
+    <h2>Predicciones pendientes</h2>
+    <p class="flow-text">
+        Tenes tiempo hasta 1 hora antes del partido para guardar tus
+        predicciones.
+    </p>
     {#if groups.length === 0}
         <Loading />
     {/if}
     <div class="row">
         {#each groups as group}
-            <Group group={group} />
+            <Group {group} />
         {/each}
     </div>
 </div>

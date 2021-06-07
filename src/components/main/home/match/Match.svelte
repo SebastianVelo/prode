@@ -1,10 +1,13 @@
 <script>
+	import { fly } from 'svelte/transition';
     import Flag from "./Flag.svelte";
-    import Button from "../../../tags/Button.svelte";
-    import { db } from "../../../../firebase/firebase";
+    import ButtonSavePrediction from "./ButtonSavePrediction.svelte";
 
     export let columns = "";
     export let match;
+    export let deleteMatch; 
+
+    let visible = true;
 
     const layout = {
         header: {
@@ -18,12 +21,6 @@
                 input: "col s4 offset-s1",
             },
         },
-        button: {
-            label: "Guardar mi prediccion",
-            size: "L",
-            bgColor: "green",
-            onClick: savePrediction,
-        },
     };
 
     let prediction = {
@@ -31,18 +28,13 @@
         away: 0,
         user: "Nit1iqwiVmOjqYqV1SZtT4Q01I92",
         match: match.id,
+        dateSave: Date.now(),
     };
 
-    function savePrediction() {
-        db.collection("predictions")
-            .doc()
-            .set({ ...prediction, dateSave: Date.now() })
-            .then(() =>  console.log("Prediccion guardada!") )
-            .catch(() => console.log("Ocurrio un error"));
-    }
 </script>
 
-<div class={`match ${columns} row`}>
+{#if visible}
+<div class={`${columns} row`} transition:fly>
     <div class={layout.header.className}>
         <p>{match.datePlay}</p>
     </div>
@@ -64,12 +56,14 @@
         </div>
         <Flag className={layout.main.flag} country={match.away} />
     </div>
-    <Button {...layout.button} />
+    <ButtonSavePrediction {prediction} {deleteMatch} />
 </div>
+{/if}
 
 <style>
     .main {
         padding: 16px;
+        border: 1px solid black;
     }
     .header {
         width: 100%;

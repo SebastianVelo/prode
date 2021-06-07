@@ -1,4 +1,5 @@
 <script>
+    import { setContext } from "svelte";
     import { useNavigate } from "svelte-navigator";
     import { auth, googleProvider } from "../../../../firebase/firebase";
     import { saveUser } from "../../../../firebase/users";
@@ -9,10 +10,11 @@
         auth.signInWithPopup(googleProvider)
             .then((result) => {
                 saveUser(result.user);
-                navigate("/home"); // pasar el user a Home / guardarlo en sesion
+                navigate("/home"); 
             })
-            .catch(() => {
+            .catch((e) => {
                 alert("Ocurrio un error, intentalo mas tarde.");
+                console.log(e);
             });
     };
 
