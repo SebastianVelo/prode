@@ -1,1 +1,7 @@
 @import "./materialize/sass/materialize.scss";
+
+.date {
+    &:nth-child(even) {
+        background-color: whitesmoke;
+    }
+}

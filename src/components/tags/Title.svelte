@@ -3,12 +3,12 @@
 </script>
 
 <hr />
-<h2>{title}</h2>
+<h3>{title}</h3>
 <hr />
 
 <style>
-    h2 { 
-        text-align: left;
+    h3 { 
+        text-align: center;
         margin: 8px;
     }
 </style>

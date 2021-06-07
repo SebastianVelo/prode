@@ -1,5 +1,4 @@
 <script>
-    import { setContext } from "svelte";
     import { useNavigate } from "svelte-navigator";
     import { auth, googleProvider } from "../../../../firebase/firebase";
     import { saveUser } from "../../../../firebase/users";
@@ -10,6 +9,7 @@
         auth.signInWithPopup(googleProvider)
             .then((result) => {
                 saveUser(result.user);
+                localStorage.setItem("user", JSON.stringify(result.user));
                 navigate("/home"); 
             })
             .catch((e) => {
