@@ -21,15 +21,9 @@
     });
 </script>
 
-<div class="date col s12 l4 xl3 row"  transition:fly={{ x: 4000, duration: 1000 }}>
+<div class="date col s12 l6 row"  transition:fly={{ x: 4000, duration: 1000 }}>
     <h4>{date.name}</h4>
     {#each matches as match}
-        <Match {match} columns="col s12" />
+        <Match {match} columns="col s6" />
     {/each}
 </div>
-
-<style>
-    .date {
-        border: 1px solid black;
-    }
-</style>

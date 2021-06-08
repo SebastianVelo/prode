@@ -70,16 +70,16 @@
             {/if}
         </div>
         <Flag className={layout.main.flag} country={match.away} />
-    </div>
 
-    {#if !predictionDB}
-        <ButtonSavePrediction
-            userId={user.uid}
-            match={match}
-            {prediction}
-            action={(prediction) => (predictionDB = prediction)}
-        />
-    {/if}
+        {#if !predictionDB}
+            <ButtonSavePrediction
+                userId={user.uid}
+                {match}
+                {prediction}
+                action={(prediction) => (predictionDB = prediction)}
+            />
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -87,6 +87,7 @@
         padding: 16px;
         border: 1px solid black;
         background-color: white;
+        color: black;
     }
     .header {
         width: 100%;

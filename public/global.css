@@ -9017,15 +9017,19 @@ input[type=range]::-ms-thumb {
 }
 
 .date {
-  margin: 0;
+  margin-bottom: 0;
+  padding: 0;
+  color: whitesmoke;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .date:nth-child(odd) {
-  background-color: whitesmoke;
+  background-color: #3a4a6e;
 }
 
 .date:nth-child(even) {
-  background-color: #e6e4e4;
+  background-color: #202b46;
 }
 
 /* width */
