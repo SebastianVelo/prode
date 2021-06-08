@@ -7,7 +7,6 @@
     export let prediction;
     export let action;
 
-    console.log(prediction);
     const button = {
         label: "Guardar mi prediccion",
         bgColor: "blue darken-3",
