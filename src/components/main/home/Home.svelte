@@ -1,4 +1,5 @@
 <script>
+    import { fade } from "svelte/transition";
     import { useNavigate } from "svelte-navigator";
     import { db } from "../../../firebase/firebase";
     import Title from "../../tags/Title.svelte";
@@ -32,9 +33,7 @@
                 Tenes tiempo hasta 1 hora antes del partido para guardar tus
                 predicciones.
             </li>
-            <li>
-                No podes editar la prediccion una vez enviada.
-            </li>
+            <li>No podes editar la prediccion una vez enviada.</li>
             <li>+4 puntos por resultado exacto</li>
             <li>+1 punto por acertar quien gana</li>
             <li>+10 puntos por adivinar el campeón</li>

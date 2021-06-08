@@ -12,14 +12,12 @@
     });
 </script>
 
-<ul />
-
 <ul class="collection with-header container">
     <li class="collection-header">
         <h4>Tabla de posiciones</h4>
     </li>
     {#each users as user, i}
-        <li class="collection-item" transition:fly={{ x: -4000, duration: 1000 }}>
+        <li class="collection-item" transition:fly={{ y: -4000, duration: 300 }}>
             <div>
                 #{i + 1}
                 {user.name} <b>{user.pts}pts</b>
@@ -30,3 +28,9 @@
         </li>
     {/each}
 </ul>
+
+<style>
+    ul {
+        margin-top: 0;
+    }
+</style>

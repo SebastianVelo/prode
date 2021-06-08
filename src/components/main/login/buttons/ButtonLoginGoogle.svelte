@@ -15,7 +15,6 @@
             })
             .catch((e) => {
                 alert("Ocurrio un error, intentalo mas tarde.");
-                console.log(e);
             });
     };
 

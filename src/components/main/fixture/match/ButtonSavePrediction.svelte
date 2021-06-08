@@ -19,7 +19,6 @@
                 away: match.away,
             }).then(() => {
                 action(prediction);
-                console.log("Prediccion guardada con exito.");
             });
         },
     };
