@@ -1,5 +1,5 @@
 <script>
-	import { useNavigate } from "svelte-navigator";
+	import { Link, useNavigate } from "svelte-navigator";
 	import Button from "../tags/Button.svelte";
 	$: user = JSON.parse(localStorage.getItem("user"));
 
@@ -20,8 +20,8 @@
 		<a class="brand-logo">CProde</a>
 		{#if user}
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="sass.html">Inicio</a></li>
-				<li><a href="badges.html">Tabla de posiciones</a></li>
+				<li><Link to="/home">Inicio</Link></li>
+				<li><Link to="/ranking">Ranking</Link></li>
 				<li><Button {...button} /></li>
 			</ul>
 		{/if}

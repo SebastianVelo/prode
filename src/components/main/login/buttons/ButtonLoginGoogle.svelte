@@ -1,14 +1,15 @@
 <script>
     import { useNavigate } from "svelte-navigator";
     import { auth, googleProvider } from "../../../../firebase/firebase";
-    import { saveUser } from "../../../../firebase/users";
+    import { getUser, saveUser } from "../../../../firebase/users";
     import Button from "../../../tags/Button.svelte";
     
     const navigate = useNavigate();
     const login = () => {
         auth.signInWithPopup(googleProvider)
             .then((result) => {
-                saveUser(result.user);
+                if(!getUser(result.user.uid))
+                    saveUser(result.user);
                 localStorage.setItem("user", JSON.stringify(result.user));
                 navigate("/home"); 
             })
@@ -22,7 +23,7 @@
         label: "Iniciar sesion con Google",
         size: "L",
         onClick: login,
-        bgColor: "blue",
+        bgColor: "blue darken-2",
     };
 </script>
 

@@ -7,8 +7,12 @@
 <hr />
 
 <style>
-    h3 { 
+    h3 {
         text-align: center;
         margin: 8px;
+    }
+
+    hr {
+        margin: 0;
     }
 </style>

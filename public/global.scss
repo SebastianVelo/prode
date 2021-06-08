@@ -1,8 +1,12 @@
 @import "./materialize/sass/materialize.scss";
 
 .date {
-    &:nth-child(even) {
+    margin: 0;
+    &:nth-child(odd) {
         background-color: whitesmoke;
+    }    
+    &:nth-child(even) {
+        background-color: rgb(230, 228, 228);
     }
 }
 

@@ -16,7 +16,7 @@
   };
 </script>
 
-<div class="row">
+<div class="row container">
     <form class={materializeLayout}>
       <div class="row">
         <InputField {...userInput} />

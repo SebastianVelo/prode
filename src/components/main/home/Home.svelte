@@ -2,8 +2,7 @@
     import { useNavigate } from "svelte-navigator";
     import { db } from "../../../firebase/firebase";
     import Title from "../../tags/Title.svelte";
-    import Loading from "../../tags/Loading.svelte";
-    import Group from "./group/Group.svelte";
+    import Fixture from "../fixture/Fixture.svelte";
 
     let user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
@@ -20,36 +19,36 @@
             localStorage.setItem("teams", JSON.stringify([...teams]));
         });
     }
-
-    let groups = [];
-    db.collection("groups").onSnapshot((querySnapshot) => {
-        let docs = [];
-        querySnapshot.forEach((group) => {
-            docs.push({
-                ...group.data(),
-                id: group.id,
-            });
-        });
-        groups = [...docs];
-    });
 </script>
 
 <div>
     <Title title="Predicciones" />
-    <p class="flow-text">
-        ¡Hola {user.displayName}! Tenes tiempo hasta 1 hora antes del partido para guardar tus
-        predicciones.
-    </p>
-    <ul class="flow-text">
-        <li>+3 puntos por resultado exacto</li>
-        <li>+1 puntos por acertar quien gana</li>
-    </ul>
-    {#if groups.length === 0}
-        <Loading />
-    {/if}
-    <div class="row">
-        {#each groups as group}
-            <Group {group} />
-        {/each}
+    <div class="container body">
+        <p class="flow-text">
+            ¡Hola {user.displayName}!
+        </p>
+        <ul class="flow-text">
+            <li>
+                Tenes tiempo hasta 1 hora antes del partido para guardar tus
+                predicciones.
+            </li>
+            <li>
+                No podes editar la prediccion una vez enviada.
+            </li>
+            <li>+4 puntos por resultado exacto</li>
+            <li>+1 punto por acertar quien gana</li>
+            <li>+10 puntos por adivinar el campeón</li>
+        </ul>
     </div>
+    <Fixture />
 </div>
+
+<style>
+    .body {
+        text-align: left;
+    }
+
+    p {
+        text-decoration: wavy black;
+    }
+</style>

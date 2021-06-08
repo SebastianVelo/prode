@@ -6,17 +6,26 @@
 
     export let columns = "";
     export let match;
-    const user = JSON.parse(localStorage.getItem("user"));
+    export let user = JSON.parse(localStorage.getItem("user"));
+    export let predictionDB;
 
-    let predictionDB;
-    db.collection(`users`)
-        .doc(user.uid)
-        .collection(`predictions`)
-        .doc(match.id)
-        .get()
-        .then((doc) => {
-            predictionDB = doc.data();
-        });
+    let prediction = {
+        home: match.home.id,
+        away: match.away.id,
+        goalsH: 0,
+        goalsA: 0,
+    };
+
+    if (!predictionDB) {
+        db.collection(`users`)
+            .doc(user.uid)
+            .collection(`predictions`)
+            .doc(match.id)
+            .get()
+            .then((doc) => {
+                predictionDB = doc.data();
+            });
+    }
 
     const layout = {
         header: {
@@ -29,22 +38,15 @@
                 className: "goals col s6 row",
                 input: "col s4 offset-s1",
             },
+            result: {
+                className: "col s12",
+            },
         },
     };
-
-    let prediction = {
-        home: match.home.id,
-        away: match.away.id,
-        goalsH: 0,
-        goalsA: 0,
-    };
-    console.log(predictionDB);
-    console.log(prediction);
 </script>
 
-<div class={`${columns} row`} transition:fly={{ x: -20000, duration: 500 }}>
-    <div class={layout.header.className}>
-    </div>
+<div class={`${columns} row`} transition:fly={{ x: -4000, duration: 1000 }}>
+    <div class={layout.header.className} />
     <div class={layout.main.className}>
         <Flag className={layout.main.flag} country={match.home} />
         <div class={layout.main.goals.className}>
@@ -69,12 +71,13 @@
         </div>
         <Flag className={layout.main.flag} country={match.away} />
     </div>
+
     {#if !predictionDB}
         <ButtonSavePrediction
             userId={user.uid}
-            matchId={match.id}
+            match={match}
             {prediction}
-            action={(prediction) => predictionDB = prediction }
+            action={(prediction) => (predictionDB = prediction)}
         />
     {/if}
 </div>
