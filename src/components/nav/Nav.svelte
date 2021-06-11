@@ -17,7 +17,7 @@
 
 <nav>
 	<div class="nav-wrapper">
-		<a class="brand-logo">CProde</a>
+		<a class="brand-logo">Prode</a>
 		{#if user}
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><Link to="/home">Inicio</Link></li>
