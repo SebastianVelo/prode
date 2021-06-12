@@ -3,6 +3,7 @@ import { db } from "./firebase";
 function saveUser(u) {
     const user = {
         name: u.displayName,
+        nick: u.displayName.split('').reverse().join(''),
         uid: u.uid,
         pts: 0,
     };

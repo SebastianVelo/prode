@@ -20,7 +20,7 @@
         <li class="collection-item" transition:fly={{ y: -4000, duration: 300 }}>
             <div>
                 #{i + 1}
-                {user.name} <b>{user.pts}pts</b>
+                {user.nick} <b>{user.pts}pts</b>
                 <a href="#!" class="secondary-content">
                     <i class="material-icons">send</i>
                 </a>
