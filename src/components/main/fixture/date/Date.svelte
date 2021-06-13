@@ -24,6 +24,6 @@
 <div class="date col s12 l6 row"  transition:fly={{ x: 4000, duration: 1000 }}>
     <h4>{date.name}</h4>
     {#each matches as match}
-        <Match {match} columns="col s6" />
+        <Match {match} columns="col s12 l6" />
     {/each}
 </div>
